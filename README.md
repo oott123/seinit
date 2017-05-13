@@ -1,2 +1,6 @@
 # seinit
-personal init script for vps
+only for yum or apt based system
+
+use at your own risk
+
+MIT license
