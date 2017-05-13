@@ -8,7 +8,7 @@ elif (which yum > /dev/null); then
   PM=yum
 fi
 if [ "$PM" == "" ]; then
-  echo "Nither apt-get or yum is found."
+  echo "Nither apt-get nor yum is found."
   exit 1
 fi
 # Functions
