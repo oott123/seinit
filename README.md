@@ -6,6 +6,6 @@ use at your own risk
 MIT license
 
 ```bash
-bash -c "$( https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh)"
+bash -c "$( curl https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh)"
 ```
 
