@@ -46,7 +46,7 @@ function importSSHKeys () {
   [ -d ~/.ssh ] || mkdir ~/.ssh
   [ $SEI_BACKUP ] && cp -r ~/.ssh ~/.seinit/dot_ssh
   chmod 755 ~/.ssh
-  echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAyMczv8YIzNi5nrOlPHSWxMVt3zt+ZKPS1dzimMXgGZ+/JW3wB39WToVdYYpcRBV54CR6Z15qjlLFVwjIPZlTs11s6NOU5EsZbx/lVK5tVfTYTAHA2n1bSmU2D2TvxxwfcvGPe6ELy0uhoHzD9VwzLdjdKTBqG8GjuYe1MDmH1rM= oott123@laptop\nssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEA1+1X757LAH3P7H3Pp8rzp5rFuHrwF8rrwiQxJ72t5Mv1FbcF2uoCWehjRpN0Sm7baofxbxxq2np40mQcLfN0W/eigevBxUtbcJf1hSTATfwA9vxZAl6iTMIPMETufSBotcv/TWv+JBSox/76lNR4Va8g7KB9a0nUNWTtaTCE6dE= oott123@Android" >> ~/.ssh/authorized_keys
+  echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAyMczv8YIzNi5nrOlPHSWxMVt3zt+ZKPS1dzimMXgGZ+/JW3wB39WToVdYYpcRBV54CR6Z15qjlLFVwjIPZlTs11s6NOU5EsZbx/lVK5tVfTYTAHA2n1bSmU2D2TvxxwfcvGPe6ELy0uhoHzD9VwzLdjdKTBqG8GjuYe1MDmH1rM= oott123@laptop\nssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEA1+1X757LAH3P7H3Pp8rzp5rFuHrwF8rrwiQxJ72t5Mv1FbcF2uoCWehjRpN0Sm7baofxbxxq2np40mQcLfN0W/eigevBxUtbcJf1hSTATfwA9vxZAl6iTMIPMETufSBotcv/TWv+JBSox/76lNR4Va8g7KB9a0nUNWTtaTCE6dE= oott123@Android\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+NF5g0Q/0nlkrawFGbGq4E2EBg/KWN9wzPlTVPZXhcxFeeMzrSSP6y2WuwvmcQzJfnN2WsnvbJsQpkj1/R1zz+Bg6GaS1Z+1USCL6/KU0Jf2fBDMJKENAxX5TUT1WfYUrGhc0utE8wahCZ9MdbkrS33fxYeUdNic9sadbQFYHm3lvcAuYB/G6EzTUWwH5f65pDNhO4m/zeftGTwqCoatvYpSUJVnzCaSvtsz5EEv6QTI3kAPLAsAYv8MWZiyoHLfXMC8+2fDCIJqrMZKfWgGYheqe4JduZlOkhRcQ4NHovqLlUA9J0iuZ5PKupRo8ocwL85RlaeDe2gTY/CNDiYGR notroot@noroot" >> ~/.ssh/authorized_keys
   chmod 600 ~/.ssh/authorized_keys
 }
 function installByobu () {
