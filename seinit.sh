@@ -81,8 +81,7 @@ function restartSSHService () {
 function installOmz () {
   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
-  sed -i 's/^ZSH_THEME/#ZSH_THEME/g' ~/.zshrc
-  echo 'ZSH_THEME="ys"' >> ~/.zshrc
+  sed -i 's/^ZSH_THEME=.*$/ZSH_THEME=ys/g' ~/.zshrc
 }
 
 # ...
