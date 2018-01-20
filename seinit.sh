@@ -116,6 +116,9 @@ if [ `whoami` == "root" ]; then
   installPackageYumOnly epel-release
   installByobu
   installPackage zsh wget curl git htop ncdu vim
+  if [ -f /bin/zsh ]; then
+    usermod -s /bin/zsh root
+  fi
   installPackageAptOnly progress software-properties-common python-software-properties
 else
   installOmz
