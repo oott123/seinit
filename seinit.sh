@@ -53,6 +53,7 @@ function installByobu () {
   installPackage byobu
   [ $SEI_BACKUP ] && cp /usr/share/byobu/profiles/tmux ~/.seinit/tmux
   echo "set-window-option -g allow-rename off" >> /usr/share/byobu/profiles/tmux
+  sed -i 's/$BYOBU_DATE//' /usr/share/byobu/profiles/tmux
 }
 function changeSSHPort () {
   local PORT=$1
