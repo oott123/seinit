@@ -100,6 +100,7 @@ function installByobu () {
   [ $SEI_BACKUP ] && cp /usr/share/byobu/profiles/tmux ~/.seinit/tmux
   echo "set-window-option -g allow-rename off" >> /usr/share/byobu/profiles/tmux
   # sed -i 's/$BYOBU_DATE//' /usr/share/byobu/profiles/tmux
+  mkdir -p $HOME/.byobu
   echo 'BYOBU_DATE=""' >> $HOME/.byobu/profile.tmux
   echo 'BYOBU_TIME="%H:%M:%S"' >> $HOME/.byobu/profile.tmux
 }
@@ -173,14 +174,16 @@ if [ "$SEI_SHELL" == "" ]; then
     fi
     suckIPv6
     updatePMMetadata
-    importSSHKeys
     installPackageYumOnly epel-release
     installByobu
     installPackage zsh wget curl git htop ncdu vim
     if [ -f /bin/zsh ]; then
       usermod -s /bin/zsh root
     fi
-    installPackageAptOnly progress software-properties-common python-software-properties
+    importSSHKeys
+    installPackageAptOnly progress
+    installPackageAptOnly software-properties-common || true
+    installPackageAptOnly python-software-properties || true
   else
     installOmz
   fi
