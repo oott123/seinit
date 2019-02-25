@@ -92,8 +92,8 @@ function importSSHKeys () {
   wget -O /usr/local/bin/se-update-keys https://raw.githubusercontent.com/oott123/seinit/master/update-keys.sh
   chmod +x /usr/local/bin/se-update-keys
   /usr/local/bin/se-update-keys
-  [ $SEI_BACKUP ] && crontab -l > ~/.seinit/crontab
-  crontab -l | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys"; } | crontab -
+  [ $SEI_BACKUP ] && (crontab -l || echo) > ~/.seinit/crontab
+  (crontab -l || echo) | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys"; } | crontab -
 }
 function installByobu () {
   installPackage byobu
@@ -174,6 +174,9 @@ if [ "$SEI_SHELL" == "" ]; then
     installPackageYumOnly epel-release
     installByobu
     installPackage zsh wget curl git htop ncdu vim
+    if (which update-alternatives > /dev/null); then
+      update-alternatives --set editor /usr/bin/vim.basic
+    fi
     if [ -f /bin/zsh ]; then
       usermod -s /bin/zsh root
     fi
