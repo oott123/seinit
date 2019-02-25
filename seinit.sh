@@ -93,7 +93,7 @@ function importSSHKeys () {
   chmod +x /usr/local/bin/se-update-keys
   /usr/local/bin/se-update-keys
   [ $SEI_BACKUP ] && crontab -l > ~/.seinit/crontab
-  crontab -l | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys" } | crontab -
+  crontab -l | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys"; } | crontab -
 }
 function installByobu () {
   installPackage byobu
@@ -126,7 +126,7 @@ function restartSSHService () {
   service sshd restart || service ssh restart
 }
 function installOmz () {
-  sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh' | bash
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
   sed -i 's/^ZSH_THEME=.*$/ZSH_THEME=ys/g' ~/.zshrc
 }
@@ -181,6 +181,7 @@ if [ "$SEI_SHELL" == "" ]; then
     installPackageAptOnly progress
     installPackageAptOnly software-properties-common || true
     installPackageAptOnly python-software-properties || true
+    installOmz
     echo "--- Seinit finish its work now. ---"
     echo "You'd better check authorized keys file and new SSH / firewall config"
     echo "to ensure you are not locked out before you close current session."
