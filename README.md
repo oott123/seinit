@@ -9,7 +9,7 @@ MIT license
 ## Usage
 
 ```bash
-wget https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh && chmod +x seinit.sh && ./seinit.sh
+wget https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh -O seinit.sh && chmod +x seinit.sh && ./seinit.sh
 ```
 
 Shell
