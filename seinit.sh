@@ -20,9 +20,11 @@ if (which apt-get > /dev/null); then
   esac
 elif (which yum > /dev/null); then
   PM=yum
+elif (which pacman > /dev/null); then
+  PM=pacman
 fi
 if [ "$PM" == "" ]; then
-  echo "Nither apt-get nor yum is found."
+  echo "Neither apt-get nor yum is found."
   exit 1
 fi
 
@@ -43,7 +45,11 @@ function ensureLoc() {
   fi
 }
 function installPackage () {
-  $PM install -y "$@"
+  if [ "$PM" == "pacman" ]; then
+    pacman -S --noconfirm "$@" || sudo -u seinit yaourt -S --noconfirm "$@"
+  else
+    $PM install -y "$@"
+  fi
 }
 function installPackageYumOnly () {
   if [ $PM == "yum" ]; then
@@ -81,6 +87,31 @@ function updatePMMetadata () {
     apt-get update
   elif [ $PM == "yum" ]; then
     yum makecache
+  elif [ $PM == "pacman" ]; then
+    pacman -Syy
+    olddir=`pwd`
+    installPackage git base-devel
+    if grep -q "^seinit:" /etc/passwd; then
+      userdel seinit
+    fi
+    mkdir -p /home/build
+    useradd -m -s /usr/bin/nologin -d /home/build seinit
+    echo 'seinit ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+    chgrp seinit /home/build
+    chmod g+ws /home/build
+    setfacl -m u::rwx,g::rwx /home/build
+    setfacl -d --set u::rwx,g::rwx,o::- /home/build
+    cd /home/build
+    rm -rf /home/build/package-query
+    git clone https://aur.archlinux.org/package-query.git
+    cd /home/build/package-query
+    sudo -u seinit makepkg -si --noconfirm
+    cd /home/build
+    rm -rf /home/build/yaourt
+    git clone https://aur.archlinux.org/yaourt.git
+    cd /home/build/yaourt
+    sudo -u seinit makepkg -si --noconfirm
+    cd "$olddir"
   fi
 }
 function importSSHKeys () {
@@ -123,7 +154,7 @@ function enhanceSSHConnection () {
   echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config
 }
 function restartSSHService () {
-  service sshd restart || service ssh restart
+  service sshd restart || service ssh restart || systemctl restart sshd || systemctl restart ssh
 }
 function installOmz () {
   curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh' | bash
