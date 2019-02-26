@@ -181,6 +181,7 @@ if [ "$SEI_SHELL" == "" ]; then
       usermod -s /bin/zsh root
     fi
     importSSHKeys
+    [ -f /etc/default/motd-news ] && sed -i 's/ENABLED=./ENABLED=0/' /etc/default/motd-news
     installPackageAptOnly progress
     installPackageAptOnly software-properties-common || true
     installPackageAptOnly python-software-properties || true
