@@ -69,9 +69,9 @@ function fastDebMirror () {
     [ $SEI_BACKUP ] && cp /etc/apt/sources.list ~/.seinit/sources.list
     if [ "$LSB" == "ubuntu" ]; then
       # sed -i 's#^deb [^ ]* #deb mirror://mirrors.ubuntu.com/mirrors.txt #g' /etc/apt/sources.list
-      sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+      sed -i 's#/archive.ubuntu.com/#/mirrors.ustc.edu.cn/#g' /etc/apt/sources.list
     elif [ "$LSB" == "debian" ]; then
-      sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+      sed -i 's#/deb.debian.org/#/mirrors.ustc.edu.cn/#g' /etc/apt/sources.list
     fi
   fi
 }
