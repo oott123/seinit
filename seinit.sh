@@ -182,10 +182,12 @@ if [ "$SEI_SHELL" == "" ]; then
     fi
     importSSHKeys
     [ -f /etc/default/motd-news ] && sed -i 's/ENABLED=./ENABLED=0/' /etc/default/motd-news
+    [ -d /etc/update-motd.d ] && chmod -x /etc/update-motd.d/*
     installPackageAptOnly progress
     installPackageAptOnly software-properties-common || true
     installPackageAptOnly python-software-properties || true
     installOmz
+    set +x
     echo "--- Seinit finish its work now. ---"
     echo "You'd better check authorized keys file and new SSH / firewall config"
     echo "to ensure you are not locked out before you close current session."
