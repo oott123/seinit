@@ -100,6 +100,8 @@ function installByobu () {
   [ $SEI_BACKUP ] && cp /usr/share/byobu/profiles/tmux ~/.seinit/tmux
   echo "set-window-option -g allow-rename off" >> /usr/share/byobu/profiles/tmux
   sed -i 's/$BYOBU_DATE//' /usr/share/byobu/profiles/tmux
+  mkdir -p "$HOME/.byobu"
+  wget -O "$HOME/.byobu/status" https://raw.githubusercontent.com/oott123/seinit/master/byobustatus
 }
 function changeSSHPort () {
   local PORT=$1
