@@ -204,7 +204,7 @@ if [ "$SEI_SHELL" == "" ]; then
   else
     installOmz
   fi
-else
+elif [ "$SEI_SHELL" == "1" ]; then
   set +x
   set +e
   if [ -f ~/.bashrc ]; then
