@@ -132,6 +132,12 @@ function installOmz () {
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
   sed -i 's/^ZSH_THEME=.*$/ZSH_THEME=ys/g' ~/.zshrc
 }
+function updateVimRc () {
+  if [ $SEI_BACKUP ]; then
+    [ -e ~/.vimrc ] || mv ~/.vimrc ~/.seinit/vimrc
+  fi
+  curl https://raw.githubusercontent.com/oott123/dotfiles/master/.vimrc > ~/.vimrc
+}
 function help () {
   echo -e "# ${blue}installPackage${end} - Install package"
   echo -e "# ${blue}suckIPv6${end} - Disable IPv6"
@@ -143,6 +149,7 @@ function help () {
   echo -e "# ${blue}enhanceSSHConnection${end} - Enable SSH TCPKeepAlive stuff"
   echo -e "# ${blue}restartSSHService${end} - Restart SSH server"
   echo -e "$ ${blue}installOmz${end} - Install Oh-my-zsh"
+  echo -e "$ ${blue}updateVimRc${end} - Update .vimrc"
 }
 
 if [ "$SEI_SHELL" == "" ]; then
