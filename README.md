@@ -10,6 +10,7 @@ MIT license
 
 ```bash
 wget https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh -O seinit.sh && chmod +x seinit.sh && ./seinit.sh
+wget https://cdn.jsdelivr.net/gh/oott123/seinit@master/seinit.sh -O seinit.sh && chmod +x seinit.sh && ./seinit.sh
 ```
 
 Shell
@@ -22,5 +23,5 @@ SEI_SHELL=1 bash --init-file /tmp/seinit.sh
 ## update (replace) keys
 
 ```bash
-wget -O /usr/local/bin/se-update-keys https://raw.githubusercontent.com/oott123/seinit/master/update-keys.sh && chmod +x /usr/local/bin/se-update-keys && /usr/local/bin/se-update-keys; crontab -l | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys"; } | crontab -
+wget -O /usr/local/bin/se-update-keys https://cdn.jsdelivr.net/gh/oott123/seinit@master/update-keys.sh && chmod +x /usr/local/bin/se-update-keys && /usr/local/bin/se-update-keys; crontab -l | grep -v /usr/local/bin/se-update-keys | { cat; echo "3 5 * * * /usr/local/bin/se-update-keys"; } | crontab -
 ```
