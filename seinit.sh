@@ -89,7 +89,7 @@ function importSSHKeys () {
   chmod 700 ~/.seinit/dot_ssh
   chmod 755 ~/.ssh
   mkdir -p /usr/local/bin
-  wget -O /usr/local/bin/se-update-keys https://raw.githubusercontent.com/oott123/seinit/master/update-keys.sh
+  wget -O /usr/local/bin/se-update-keys https://cdn.jsdelivr.net/gh/oott123/seinit@master/update-keys.sh
   chmod +x /usr/local/bin/se-update-keys
   /usr/local/bin/se-update-keys
   [ $SEI_BACKUP ] && (crontab -l || echo) > ~/.seinit/crontab
@@ -101,7 +101,7 @@ function installByobu () {
   echo "set-window-option -g allow-rename off" >> /usr/share/byobu/profiles/tmux
   sed -i 's/$BYOBU_DATE//' /usr/share/byobu/profiles/tmux
   mkdir -p "$HOME/.byobu"
-  wget -O "$HOME/.byobu/status" https://raw.githubusercontent.com/oott123/seinit/master/byobustatus
+  wget -O "$HOME/.byobu/status" https://cdn.jsdelivr.net/gh/oott123/seinit@master/byobustatus
 }
 function changeSSHPort () {
   local PORT=$1
@@ -136,7 +136,7 @@ function updateVimRc () {
   if [ $SEI_BACKUP ]; then
     [ -e ~/.vimrc ] || mv ~/.vimrc ~/.seinit/vimrc
   fi
-  curl https://raw.githubusercontent.com/oott123/dotfiles/master/.vimrc > ~/.vimrc
+  curl https://cdn.jsdelivr.net/gh/oott123/dotfiles@master/.vimrc > ~/.vimrc
 }
 function help () {
   echo -e "# ${blue}installPackage${end} - Install package"
