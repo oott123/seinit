@@ -8,9 +8,16 @@ MIT license
 
 ## Usage
 
+### From GitHub
+
 ```bash
 wget https://raw.githubusercontent.com/oott123/seinit/master/seinit.sh -O seinit.sh && chmod +x seinit.sh && ./seinit.sh
-wget https://cdn.jsdelivr.net/gh/oott123/seinit@master/seinit.sh -O seinit.sh && chmod +x seinit.sh && ./seinit.sh
+```
+
+### From jsdelivr
+
+```bash
+wget https://cdn.jsdelivr.net/gh/oott123/seinit@master/seinit.sh -O seinit.sh && chmod +x seinit.sh && LOC=CN ./seinit.sh
 ```
 
 Shell
