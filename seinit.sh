@@ -1,6 +1,32 @@
 #!/bin/bash
-set -e
-set -x
+
+# taken from https://unix.stackexchange.com/a/421403
+bashget() {
+  read proto server path <<< "${1//"/"/ }"
+  DOC=/${path// //}
+  HOST=${server//:*}
+  PORT=${server//*:}
+  [[ x"${HOST}" == x"${PORT}" ]] && PORT=80
+
+  exec 3<>/dev/tcp/${HOST}/$PORT
+
+  # send request
+  echo -en "GET ${DOC} HTTP/1.0\r\nHost: ${HOST}\r\n\r\n" >&3
+
+  # read the header, it ends in a empty line (just CRLF)
+  while IFS= read -r line ; do 
+      [[ "$line" == $'\r' ]] && break
+  done <&3
+
+  # read the data
+  nul='\0'
+  while IFS= read -d '' -r x || { nul=""; [ -n "$x" ]; }; do 
+      printf "%s$nul" "$x"
+  done <&3
+  exec 3>&-
+}
+
+set -xeo pipefail
 
 # PM detect
 if (which apt-get > /dev/null); then
@@ -33,12 +59,11 @@ blue="\033[0;34m"
 function ensureLoc() {
   if [ "$LOC" == "" ]; then
     if (which curl > /dev/null); then
-      LOC=$(curl -s http://su.baidu.com/cdn-cgi/trace | grep loc | cut -c 5-)
+      LOC=$(curl -s http://cf-ns.cn/cdn-cgi/trace | grep loc | cut -c 5-)
     elif (which wget > /dev/null); then
-      LOC=$(wget -O- http://su.baidu.com/cdn-cgi/trace  | grep loc | cut -c 5-)
+      LOC=$(wget -O- http://cf-ns.cn/cdn-cgi/trace  | grep loc | cut -c 5-)
     else
-      echo "You don't have curl or wget installed. Use LOC=CN seinit.sh to init, or install curl or wget to continue!"
-      exit 1
+      LOC=$(bashget http://cf-ns.cn/cdn-cgi/trace  | grep loc | cut -c 5-)
     fi
   fi
 }
