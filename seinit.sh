@@ -153,9 +153,14 @@ function restartSSHService () {
   service sshd restart || service ssh restart
 }
 function installOmz () {
-  curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | grep -v 'env zsh' | bash
+  ensureLoc
+  if [ "$LOC" == CN ]; then
+    export REMOTE=https://github.com.cnpmjs.org/https://github.com/ohmyzsh/ohmyzsh.git
+  fi
+  curl https://cdn.jsdelivr.net/gh/ohmyzsh/ohmyzsh@master/tools/install.sh | grep -v 'env zsh' | bash
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
   sed -i 's/^ZSH_THEME=.*$/ZSH_THEME=ys/g' ~/.zshrc
+  sed -i '/oh-my-zsh.sh/i DISABLE_AUTO_UPDATE=true' ~/.zshrc
 }
 function updateVimRc () {
   if [ $SEI_BACKUP ]; then
