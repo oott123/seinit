@@ -155,7 +155,7 @@ function restartSSHService () {
 function installOmz () {
   ensureLoc
   if [ "$LOC" == CN ]; then
-    export REMOTE=https://github.com.cnpmjs.org/https://github.com/ohmyzsh/ohmyzsh.git
+    export REMOTE=https://gitlab.com/33mirrors/ohmyzsh.git
   fi
   curl https://cdn.jsdelivr.net/gh/ohmyzsh/ohmyzsh@master/tools/install.sh | grep -v 'env zsh' | bash
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
@@ -167,6 +167,13 @@ function updateVimRc () {
     [ -e ~/.vimrc ] || mv ~/.vimrc ~/.seinit/vimrc
   fi
   curl https://cdn.jsdelivr.net/gh/oott123/dotfiles@master/.vimrc > ~/.vimrc
+}
+function updateSystemVimRc() {
+  if [ $SEI_BACKUP ]; then
+    [ -e /etc/vim/vimrc.local ] || mv ~/.vimrc ~/.seinit/vimrc.local
+  fi
+  echo "set mouse=" >> /etc/vim/vimrc.local
+  echo "set ttymouse=" >> /etc/vim/vimrc.local
 }
 function help () {
   echo -e "# ${blue}installPackage${end} - Install package"
@@ -213,6 +220,7 @@ if [ "$SEI_SHELL" == "" ]; then
     installPackageYumOnly epel-release
     installByobu
     installPackage zsh wget curl git htop ncdu vim
+    updateSystemVimRc
     if (which update-alternatives > /dev/null); then
       update-alternatives --set editor /usr/bin/vim.basic
     fi
