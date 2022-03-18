@@ -170,7 +170,7 @@ function updateVimRc () {
 }
 function updateSystemVimRc() {
   if [ $SEI_BACKUP ]; then
-    [ -e /etc/vim/vimrc.local ] || mv ~/.vimrc ~/.seinit/vimrc.local
+    [ -e /etc/vim/vimrc.local ] || mv /etc/vim/vimrc.local ~/.seinit/etc-vimrc.local
   fi
   echo "set mouse=" >> /etc/vim/vimrc.local
   echo "set ttymouse=" >> /etc/vim/vimrc.local
