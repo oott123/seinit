@@ -213,7 +213,7 @@ if [ "$SEI_SHELL" == "" ]; then
     updatePMMetadata
     installPackageYumOnly epel-release
     installByobu
-    installPackage zsh wget curl git htop ncdu vim
+    installPackage zsh wget curl git htop ncdu vim rsync
     updateSystemVimRc
     if (which update-alternatives > /dev/null); then
       update-alternatives --set editor /usr/bin/vim.basic
