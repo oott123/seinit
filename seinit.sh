@@ -163,15 +163,9 @@ function installOmz () {
   sed -i '/oh-my-zsh.sh/i DISABLE_AUTO_UPDATE=true' ~/.zshrc
 }
 function updateVimRc () {
-  if [ $SEI_BACKUP ]; then
-    [ -e ~/.vimrc ] || mv ~/.vimrc ~/.seinit/vimrc
-  fi
   curl https://cdn.jsdelivr.net/gh/oott123/dotfiles@master/.vimrc > ~/.vimrc
 }
 function updateSystemVimRc() {
-  if [ $SEI_BACKUP ]; then
-    [ -e /etc/vim/vimrc.local ] || mv /etc/vim/vimrc.local ~/.seinit/etc-vimrc.local
-  fi
   echo "set mouse=" >> /etc/vim/vimrc.local
   echo "set ttymouse=" >> /etc/vim/vimrc.local
 }
