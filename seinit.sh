@@ -59,9 +59,9 @@ blue="\033[0;34m"
 function ensureLoc() {
   if [ "$LOC" == "" ]; then
     if (which curl > /dev/null); then
-      LOC=$(curl -s http://cf-ns.com/cdn-cgi/trace | grep loc | cut -c 5-)
+      LOC=$(curl -m 5 -s http://cf-ns.com/cdn-cgi/trace | grep loc | cut -c 5-)
     elif (which wget > /dev/null); then
-      LOC=$(wget -O- http://cf-ns.com/cdn-cgi/trace  | grep loc | cut -c 5-)
+      LOC=$(wget --timeout=5 -O- http://cf-ns.com/cdn-cgi/trace  | grep loc | cut -c 5-)
     else
       LOC=$(bashget http://cf-ns.com/cdn-cgi/trace  | grep loc | cut -c 5-)
     fi
