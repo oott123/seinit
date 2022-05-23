@@ -185,12 +185,7 @@ function help () {
 
 if [ "$SEI_SHELL" == "" ]; then
   # ...
-  if [ "$SEI_BACKUP" == "" ]; then
-    read -p "May I make backup files in ~/.seinit ? [Y/n]" -r
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-      SEI_BACKUP=yes
-    fi
-  fi
+  SEI_BACKUP=yes
   if [ $SEI_BACKUP ]; then
     [ -d ~/.seinit ] || mkdir ~/.seinit
     chmod 600 ~/.seinit
