@@ -114,7 +114,7 @@ function importSSHKeys () {
   chmod 700 ~/.seinit/dot_ssh
   chmod 755 ~/.ssh
   mkdir -p /usr/local/bin
-  wget -O /usr/local/bin/se-update-keys https://cdn.jsdelivr.net/gh/oott123/seinit@master/update-keys.sh
+  wget -O /usr/local/bin/se-update-keys https://oott123.urn.cx/seinit/update-keys.sh
   chmod +x /usr/local/bin/se-update-keys
   /usr/local/bin/se-update-keys
   [ $SEI_BACKUP ] && (crontab -l || echo) > ~/.seinit/crontab
@@ -126,7 +126,7 @@ function installByobu () {
   echo "set-window-option -g allow-rename off" >> /usr/share/byobu/profiles/tmux
   sed -i 's/$BYOBU_DATE//' /usr/share/byobu/profiles/tmux
   mkdir -p "$HOME/.byobu"
-  wget -O "$HOME/.byobu/status" https://cdn.jsdelivr.net/gh/oott123/seinit@master/byobustatus
+  wget -O "$HOME/.byobu/status" https://oott123.urn.cx/seinit/byobustatus
 }
 function changeSSHPort () {
   local PORT=$1
@@ -155,15 +155,15 @@ function restartSSHService () {
 function installOmz () {
   ensureLoc
   if [ "$LOC" == CN ]; then
-    export REMOTE=https://gitlab.com/33mirrors/ohmyzsh.git
+    export REMOTE=https://git.atto.town/public-mirrors/oh-my-zsh.git
   fi
-  curl https://cdn.jsdelivr.net/gh/ohmyzsh/ohmyzsh@master/tools/install.sh | grep -v 'env zsh' | bash
+  curl https://git.atto.town/public-mirrors/oh-my-zsh/-/raw/master/tools/install.sh | grep -v 'env zsh' | bash
   [ $SEI_BACKUP ] && cp ~/.zshrc ~/.seinit/dot_zshrc
   sed -i 's/^ZSH_THEME=.*$/ZSH_THEME=ys/g' ~/.zshrc
   sed -i '/oh-my-zsh.sh/i DISABLE_AUTO_UPDATE=true' ~/.zshrc
 }
 function updateVimRc () {
-  curl https://cdn.jsdelivr.net/gh/oott123/dotfiles@master/.vimrc > ~/.vimrc
+  curl https://oott123.urn.cx/seinit/.vimrc > ~/.vimrc
 }
 function updateSystemVimRc() {
   echo "set mouse=" >> /etc/vim/vimrc.local
