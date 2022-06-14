@@ -4,6 +4,7 @@ pages:
   script:
     - mkdir .public
     - cp -r ./* .public
+    - cp -r ./.vimrc .public
     - rm -rf public
     - mv .public public
   artifacts:
