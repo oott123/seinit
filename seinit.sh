@@ -189,7 +189,7 @@ if [ "$SEI_SHELL" == "" ]; then
   SEI_BACKUP=yes
   if [ $SEI_BACKUP ]; then
     [ -d ~/.seinit ] || mkdir ~/.seinit
-    chmod 600 ~/.seinit
+    chmod 700 ~/.seinit
   fi
   if [ `whoami` == "root" ]; then
     if [ "$SEI_FUCK_SSH" == "" ]; then
