@@ -220,7 +220,7 @@ if [ "$SEI_SHELL" == "" ]; then
     importSSHKeys
     [ -f /etc/default/motd-news ] && sed -i 's/ENABLED=./ENABLED=0/' /etc/default/motd-news
     [ -d /etc/update-motd.d ] && chmod o-x,g-x,a-x /etc/update-motd.d/*
-    installPackageAptOnly progress
+    installPackageAptOnly progress cron
     installPackageAptOnly software-properties-common || true
     installPackageAptOnly python-software-properties || true
     installOmz
