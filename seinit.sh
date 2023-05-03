@@ -98,6 +98,12 @@ function fastDebMirror () {
       sed -i 's#/cn.archive.ubuntu.com/#/mirrors.ustc.edu.cn/#g' /etc/apt/sources.list
     elif [ "$LSB" == "debian" ]; then
       sed -i 's#/deb.debian.org/#/mirrors.ustc.edu.cn/#g' /etc/apt/sources.list
+      if [ -e /etc/apt/mirrors/debian.list ]; then
+        echo https://mirrors.ustc.edu.cn/debian > /etc/apt/mirrors/debian.list
+      fi
+      if [ -e /etc/apt/mirrors/debian-security.list ]; then
+        echo https://mirrors.ustc.edu.cn/debian-security > /etc/apt/mirrors/debian-security.list
+      fi
     fi
   fi
 }
