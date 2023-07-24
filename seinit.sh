@@ -173,6 +173,8 @@ function updateVimRc () {
   curl https://oott123.urn.cx/seinit/.vimrc > ~/.vimrc
 }
 function updateSystemVimRc() {
+  echo "source \$VIMRUNTIME/defaults.vim" >> /etc/vim/vimrc.local
+  echo "let g:skip_defaults_vim = 1" >> /etc/vim/vimrc.local
   echo "set mouse=" >> /etc/vim/vimrc.local
   echo "set ttymouse=" >> /etc/vim/vimrc.local
 }
