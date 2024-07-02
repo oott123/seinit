@@ -178,6 +178,14 @@ function updateSystemVimRc() {
   echo "set mouse=" >> /etc/vim/vimrc.local
   echo "set ttymouse=" >> /etc/vim/vimrc.local
 }
+function installUnattendedUpgrades() {
+  apt-get install -y unattended-upgrades
+  cat > /etc/apt/apt.conf.d/51seiunup <<<EOF
+Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+EOF
+}
 function help () {
   echo -e "# ${blue}installPackage${end} - Install package"
   echo -e "# ${blue}suckIPv6${end} - Disable IPv6"
@@ -231,6 +239,8 @@ if [ "$SEI_SHELL" == "" ]; then
     installPackageAptOnly progress cron
     installPackageAptOnly software-properties-common || true
     installPackageAptOnly python-software-properties || true
+    installPackageAptOnly fail2ban
+    [ $PM == "apt-get" ] && installUnattendedUpgrades
     installOmz
     set +x
     echo "--- Seinit finish its work now. ---"
