@@ -180,7 +180,7 @@ function updateSystemVimRc() {
 }
 function installUnattendedUpgrades() {
   apt-get install -y unattended-upgrades
-  cat > /etc/apt/apt.conf.d/51seiunup <<<EOF
+  cat > /etc/apt/apt.conf.d/51seiunup <<EOF
 Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
